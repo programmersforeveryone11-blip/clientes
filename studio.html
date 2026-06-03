@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>luizabeth's .studios | Diseño & Desarrollo Web Premium</title>
+  <!-- Tailwind CSS para diseño rápido y moderno -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Playfair Display (Serif elegante como el logo) y DM Sans (Sans-serif limpia) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin crossOrigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <!-- Lucide Icons para iconos profesionales -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandCrema: '#FBF8F3', // Fondo crema claro del patrón
+            brandRojo: '#D11A1A',  // Rojo vibrante de las estrellas del logo
+            brandAzul: '#5D99C6',  // Azul del patrón de rayas
+            brandNegro: '#0A0A0A', // Negro tipográfico elegante
+            brandGris: '#555555'
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"DM Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Efecto de rayas estéticas de la imagen de fondo */
+    .rayas-patron {
+      background: repeating-linear-gradient(
+        90deg,
+        #D11A1A,
+        #D11A1A 12px,
+        #FBF8F3 12px,
+        #FBF8F3 24px,
+        #5D99C6 24px,
+        #5D99C6 36px,
+        #FBF8F3 36px,
+        #FBF8F3 48px
+      );
+    }
+    
+    /* Suavizado de transiciones globales */
+    * {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Ocultar scrollbar al abrir modal sin perder posición */
+    .modal-open {
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="bg-brandCrema text-brandNegro font-sans antialiased selection:bg-brandRojo selection:text-white">
+
+  <!-- BARRA DE RAYAS SUPERIOR FIJA -->
+  <div class="fixed top-0 left-0 w-full h-3 rayas-patron z-50"></div>
+
+  <!-- NAVBAR PRINCIPAL FIJO (STICKY NAVBAR) que no se baja -->
+  <header class="fixed top-3 left-0 w-full bg-brandCrema/95 backdrop-blur-md border-b border-brandNegro/5 z-40 py-3 shadow-sm px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      
+      <!-- LOGO RECREADO FIELMENTE (luizabeth's .studios) -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="relative w-12 h-12 flex items-center justify-center">
+          <!-- Estrella Roja Superior -->
+          <svg class="absolute -top-1 -left-1 w-8 h-8 text-brandRojo animate-pulse" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5Z"/>
+          </svg>
+          <!-- Estrella Roja Inferior -->
+          <svg class="absolute -bottom-1 -left-2 w-7 h-7 text-brandRojo opacity-80" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5Z"/>
+          </svg>
+          <!-- Destello Negro Pequeño del Logo -->
+          <svg class="absolute top-2 right-1 w-4 h-4 text-brandNegro" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5Z"/>
+          </svg>
+        </div>
+        
+        <div class="flex flex-col -ml-2">
+          <span class="font-serif text-2xl font-bold tracking-tight leading-none text-brandNegro">
+            luizabeth's
+          </span>
+          <span class="text-[10px] font-mono tracking-[0.4em] text-brandNegro/70 uppercase pl-1">
+            .studios
+          </span>
+        </div>
+      </a>
+
+      <!-- ENLACES DE NAVEGACIÓN (Desktop) -->
+      <nav class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wider uppercase text-brandNegro/80">
+        <a href="#inicio" id="nav-inicio" class="hover:text-brandRojo transition-colors duration-200">Inicio</a>
+        <a href="#servicios" id="nav-servicios" class="hover:text-brandRojo transition-colors duration-200">Servicios</a>
+        <a href="#planes" id="nav-planes" class="hover:text-brandRojo transition-colors duration-200">Planes</a>
+        <a href="#filosofia" id="nav-nosotros" class="hover:text-brandRojo transition-colors duration-200">Nosotros</a>
+      </nav>
+
+      <!-- SECTOR DE IDIOMA Y BOTÓN DE CONTACTO -->
+      <div class="flex items-center gap-4">
+        
+        <!-- Selector de Idioma Minimalista -->
+        <div class="relative inline-block text-left">
+          <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-white/80 border border-brandNegro/10 text-brandNegro text-xs font-bold uppercase tracking-wider py-2 px-3 rounded-xl focus:outline-none focus:border-brandRojo cursor-pointer">
+            <option value="es">ES 🇪🇸</option>
+            <option value="en">EN 🇬🇧</option>
+            <option value="it">IT 🇮🇹</option>
+          </select>
+        </div>
+
+        <!-- BOTÓN DE CONTACTO RÁPIDO -->
+        <button onclick="triggerGeneralContact()" id="btn-contacto" class="inline-flex items-center gap-2 bg-brandNegro hover:bg-brandRojo text-brandCrema text-xs font-semibold uppercase tracking-widest py-3 px-5 rounded-full shadow-lg hover:shadow-brandRojo/20 border border-transparent hover:border-brandRojo transition-all duration-300">
+          <span>Contacto</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECCIÓN HERO -->
+  <section id="inicio" class="pt-32 pb-20 md:pt-44 md:pb-28 px-4 relative overflow-hidden bg-gradient-to-b from-brandCrema to-white">
+    <!-- Sutiles líneas estéticas de fondo -->
+    <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
+      <div class="max-w-7xl mx-auto h-full w-full border-l border-r border-brandNegro flex justify-between">
+        <div class="w-px h-full bg-brandNegro"></div>
+        <div class="w-px h-full bg-brandNegro"></div>
+      </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto text-center relative z-10">
+      <!-- Tag de introducción refinado -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-brandRojo/10 text-brandRojo rounded-full mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-brandRojo animate-ping"></span>
+        <span class="text-xs font-bold uppercase tracking-widest font-sans" id="hero-tag">Estudio de Diseño Boutique</span>
+      </div>
+
+      <!-- El gran y llamativo, pero fino título solicitado -->
+      <h1 class="font-serif text-5xl md:text-8xl font-normal leading-[1.1] tracking-tight mb-8">
+        <span id="hero-title-1">¿Necesitas un</span> <br class="hidden md:inline">
+        <span class="italic font-bold text-transparent bg-clip-text bg-gradient-to-r from-brandNegro via-brandRojo to-brandNegro" id="hero-title-accent">
+          sitio web
+        </span>?
+      </h1>
+
+      <!-- Párrafo refinado de soporte -->
+      <p class="text-brandGris text-lg md:text-xl max-w-2xl mx-auto font-sans leading-relaxed mb-12" id="hero-desc">
+        Creamos experiencias digitales de alto impacto. Páginas web diseñadas de forma única y exclusiva para que tu marca destaque con sofisticación, elegancia y un rendimiento técnico impecable.
+      </p>
+
+      <!-- Botones de Acción -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="#servicios" id="btn-explore" class="w-full sm:w-auto text-center bg-brandRojo hover:bg-brandNegro text-white font-medium px-8 py-4 rounded-xl shadow-lg shadow-brandRojo/10 hover:shadow-none transition-all duration-300">
+          Explorar Servicios
+        </a>
+        <a href="#planes" id="btn-planes" class="w-full sm:w-auto text-center border-2 border-brandNegro/10 hover:border-brandNegro bg-transparent text-brandNegro font-medium px-8 py-4 rounded-xl transition-all duration-300">
+          Ver Planes
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LÍNEA DIVISORIA ESTILIZADA DE RAYAS -->
+  <div class="w-full h-1.5 rayas-patron"></div>
+
+  <!-- SECCIÓN: SERVICIOS -->
+  <section id="servicios" class="py-20 md:py-28 px-4 bg-brandCrema/30">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Encabezado de la sección -->
+      <div class="text-center mb-16 md:mb-24">
+        <span class="text-brandRojo font-mono text-sm tracking-[0.25em] uppercase block mb-3" id="services-tag">Nuestras Especialidades</span>
+        <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight text-brandNegro" id="services-title">
+          Servicios de Creación Web de Alta Gama
+        </h2>
+        <div class="w-12 h-1 bg-brandRojo mx-auto mt-6"></div>
+      </div>
+
+      <!-- Contenedor dinámico de las 10 tarjetas cargadas según idioma -->
+      <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Renderizado dinámicamente por JavaScript para admitir traducciones completas -->
+      </div>
+    </div>
+  </section>
+
+  <!-- LÍNEA DIVISORIA DE RAYAS -->
+  <div class="w-full h-1.5 rayas-patron"></div>
+
+  <!-- SECCIÓN: PLANES (Con la reincorporación de Luizabeth's Signature) -->
+  <section id="planes" class="py-20 md:py-28 px-4 bg-white relative">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Encabezado de sección -->
+      <div class="text-center mb-16">
+        <span class="text-brandRojo font-mono text-sm tracking-[0.25em] uppercase block mb-3" id="planes-tag">Inversión Inteligente</span>
+        <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight text-brandNegro" id="planes-title">
+          Planes Diseñados para Escalar
+        </h2>
+        <div class="w-12 h-1 bg-brandRojo mx-auto mt-6"></div>
+      </div>
+
+      <!-- Tarjetas de Planes Dinámicas (3 columnas restauradas con Luizabeth's Signature) -->
+      <div id="planesGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        <!-- Renderizado dinámicamente por JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN FILOSOFÍA -->
+  <section id="filosofia" class="py-20 bg-brandNegro text-white relative overflow-hidden">
+    <!-- Estrella Roja Gigante Decorativa en el fondo -->
+    <div class="absolute -right-36 -bottom-36 w-96 h-96 text-brandRojo opacity-[0.04] pointer-events-none">
+      <svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full">
+        <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5Z"/>
+      </svg>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <div class="inline-flex items-center justify-center gap-3 mb-6">
+        <div class="w-6 h-px bg-brandRojo"></div>
+        <span class="text-brandRojo font-mono text-xs tracking-[0.25em] uppercase" id="filo-tag">Por qué nosotros</span>
+        <div class="w-6 h-px bg-brandRojo"></div>
+      </div>
+      <h3 class="font-serif text-3xl md:text-5xl font-medium tracking-tight mb-8" id="filo-title">
+        No hacemos simples páginas web. <br>
+        Damos <span class="italic text-brandRojo font-bold">vida digital</span> a tu visión.
+      </h3>
+      <p class="text-brandCrema/60 max-w-3xl mx-auto leading-relaxed text-base md:text-lg mb-12" id="filo-desc">
+        En luizabeth's .studios nos comprometemos con la perfección estética de cada píxel. Creemos en la elegancia visual sin comprometer la velocidad ni la accesibilidad, logrando piezas únicas en internet que impactan en los ojos de tu cliente.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div>
+          <h4 class="font-serif text-3xl md:text-4xl font-bold text-brandRojo mb-2">100%</h4>
+          <p class="text-xs text-brandCrema/50 uppercase tracking-widest" id="stat-1">Exclusivo a Medida</p>
+        </div>
+        <div>
+          <h4 class="font-serif text-3xl md:text-4xl font-bold text-brandRojo mb-2">&lt;1.5s</h4>
+          <p class="text-xs text-brandCrema/50 uppercase tracking-widest" id="stat-2">Velocidad de Carga</p>
+        </div>
+        <div>
+          <h4 class="font-serif text-3xl md:text-4xl font-bold text-brandRojo mb-2">99.9%</h4>
+          <p class="text-xs text-brandCrema/50 uppercase tracking-widest" id="stat-3">Tiempo En Línea</p>
+        </div>
+        <div>
+          <h4 class="font-serif text-3xl md:text-4xl font-bold text-brandRojo mb-2">24/7</h4>
+          <p class="text-xs text-brandCrema/50 uppercase tracking-widest" id="stat-4">Soporte Dedicado</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA (FOOTER) con enlace a la web creativa -->
+  <footer class="bg-brandCrema py-16 px-4 border-t border-brandNegro/5 relative pb-24">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+      
+      <!-- LOGO DEL FOOTER -->
+      <a href="#" class="flex items-center gap-3">
+        <div class="relative w-10 h-10 flex items-center justify-center">
+          <svg class="absolute -top-1 -left-1 w-6 h-6 text-brandRojo" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5Z"/>
+          </svg>
+          <svg class="absolute top-1 right-1 w-3 h-3 text-brandNegro" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5Z"/>
+          </svg>
+        </div>
+        <div class="flex flex-col -ml-2">
+          <span class="font-serif text-xl font-bold tracking-tight leading-none text-brandNegro">
+            luizabeth's
+          </span>
+          <span class="text-[8px] font-mono tracking-[0.4em] text-brandNegro/70 uppercase pl-1">
+            .studios
+          </span>
+        </div>
+      </a>
+
+      <!-- REDES SOCIALES MEJORADAS CON EFECTO MARCA -->
+      <div class="flex items-center gap-6">
+        <!-- Instagram Link -->
+        <a href="https://www.instagram.com/luizabeths_studios/?hl=es" target="_blank" rel="noopener" 
+           class="group w-14 h-14 rounded-2xl bg-white border border-brandNegro/10 flex items-center justify-center text-brandNegro hover:text-white hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:scale-110 hover:-translate-y-1 shadow-sm hover:shadow-[0_10px_25px_rgba(238,42,123,0.3)] transition-all duration-300"
+           aria-label="Instagram">
+          <svg class="w-6 h-6 stroke-current fill-none transition-transform group-hover:scale-110" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+
+        <!-- TikTok Link -->
+        <a href="https://www.tiktok.com/@luizabeths_studios?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" 
+           class="group w-14 h-14 rounded-2xl bg-white border border-brandNegro/10 flex items-center justify-center text-brandNegro hover:text-white hover:bg-[#010101] hover:scale-110 hover:-translate-y-1 shadow-sm hover:shadow-[0_10px_25px_rgba(0,242,234,0.3),_0_10px_25px_rgba(254,44,85,0.3)] transition-all duration-300"
+           aria-label="TikTok">
+          <svg class="w-6 h-6 fill-current transition-transform group-hover:scale-110 group-hover:text-white" viewBox="0 0 24 24">
+            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.63 4.16 1.02 1.11 2.44 1.8 3.94 1.96V9.9c-1.78-.04-3.5-.66-4.92-1.75-.15-.12-.3-.25-.45-.38v7.21c.01 1.95-.6 3.88-1.75 5.43-1.57 2.1-4.04 3.42-6.66 3.55-2.61.12-5.23-.88-6.93-2.87-1.87-2.18-2.45-5.32-1.49-8.02.93-2.67 3.28-4.71 6.13-5.21V12c-1.39.22-2.63 1.1-3.23 2.37-.73 1.48-.49 3.39.59 4.63 1.07 1.25 2.87 1.76 4.47 1.25 1.51-.46 2.58-1.89 2.64-3.48V.02h-.14z"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- DERECHOS Y ENLACE A WEB CREATIVA -->
+      <div class="text-center md:text-right flex flex-col items-center md:items-end gap-2">
+        <p class="text-xs text-brandGris mb-1" id="footer-copy">
+          &copy; 2026 luizabeth's .studios. Todos los derechos reservados.
+        </p>
+        <p class="text-[10px] text-brandGris/50 font-mono mb-2" id="footer-sub">
+          Diseño Exclusivo • Hecho con Amor y Píxeles
+        </p>
+        <!-- Enlace a la Web Creativa solicitado -->
+        <a href="https://web-creativa.vercel.app" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-[11px] font-semibold text-brandRojo hover:text-brandNegro uppercase tracking-widest border-b border-brandRojo/30 hover:border-brandNegro transition-all pb-0.5">
+          <span>Web Creativa</span>
+          <i data-lucide="external-link" class="w-3 h-3"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- BARRA INFERIOR DE RAYAS ESTILO ESTÉTICO -->
+    <div class="absolute bottom-0 left-0 w-full h-3 rayas-patron"></div>
+  </footer>
+
+
+  <!-- VENTANA EMERGENTE (MODAL INTERACTIVO) PARA LOS SERVICIOS -->
+  <div id="serviceModal" class="fixed inset-0 bg-brandNegro/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <!-- Contenido del Modal -->
+    <div class="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl relative transform scale-95 transition-all duration-300">
+      
+      <!-- Detalle estético de rayas arriba del modal -->
+      <div class="w-full h-2 rayas-patron"></div>
+
+      <!-- Botón de Cerrar -->
+      <button onclick="closeModal()" class="absolute top-5 right-5 text-brandNegro/50 hover:text-brandRojo p-1.5 hover:bg-brandCrema rounded-full transition-colors">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <!-- Cuerpo del Modal -->
+      <div class="p-8 md:p-10">
+        <!-- Icono Dinámico -->
+        <div id="modalIconContainer" class="w-16 h-16 rounded-2xl bg-brandRojo/10 flex items-center justify-center text-brandRojo mb-6">
+          <i id="modalIcon" data-lucide="layout" class="w-8 h-8"></i>
+        </div>
+
+        <!-- Título -->
+        <h3 id="modalTitle" class="font-serif text-3xl font-bold text-brandNegro mb-4">
+          Cargando Servicio...
+        </h3>
+
+        <!-- Descripción -->
+        <p id="modalDescription" class="text-brandGris leading-relaxed text-sm md:text-base mb-8">
+          Cargando descripción...
+        </p>
+
+        <!-- Características destacadas del servicio -->
+        <div class="mb-8 bg-brandCrema/50 p-4 rounded-xl border border-brandNegro/[0.03]">
+          <h4 class="text-xs font-bold uppercase tracking-widest text-brandNegro mb-3" id="modal-includes-label">¿Qué incluye el servicio?</h4>
+          <ul id="modalFeatures" class="space-y-2 text-xs md:text-sm text-brandGris">
+            <!-- Cargado por JS -->
+          </ul>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="flex flex-col sm:flex-row gap-3">
+          <button id="modalLoQuieroButton" class="w-full text-center bg-brandRojo hover:bg-brandNegro text-white font-medium py-3.5 px-6 rounded-xl shadow-lg shadow-brandRojo/10 hover:shadow-none transition-all inline-flex items-center justify-center gap-2">
+            <span id="modal-btn-want">¡Lo quiero!</span>
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+          </button>
+          <button onclick="closeModal()" class="w-full sm:w-auto bg-brandCrema hover:bg-brandNegro/5 text-brandNegro font-semibold py-3.5 px-6 rounded-xl transition-all" id="modal-btn-back">
+            Volver
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL EXCLUSIVO: SELECTOR DE CANAL DE CONTACTO (WhatsApp, Telegram, Gmail) -->
+  <div id="channelSelectorModal" class="fixed inset-0 bg-brandNegro/75 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl relative transform scale-95 transition-all duration-300">
+      
+      <!-- Detalle estético de rayas -->
+      <div class="w-full h-2.5 rayas-patron"></div>
+
+      <!-- Botón de Cerrar -->
+      <button onclick="closeChannelSelector()" class="absolute top-5 right-5 text-brandNegro/50 hover:text-brandRojo p-1.5 hover:bg-brandCrema rounded-full transition-colors">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <!-- Cuerpo -->
+      <div class="p-8">
+        <div class="text-center mb-8">
+          <span class="text-brandRojo font-mono text-[10px] tracking-[0.2em] uppercase block mb-2" id="chan-tag">Canal de Contacto</span>
+          <h3 class="font-serif text-2xl font-bold text-brandNegro" id="chan-title">Elige tu medio preferido</h3>
+          <p id="channelSelectorSub" class="text-brandGris text-xs mt-1">¿Cómo deseas coordinar la contratación?</p>
+        </div>
+
+        <!-- Lista de Canales -->
+        <div class="space-y-4">
+          
+          <!-- WHATSAPP -->
+          <a id="channelWhatsApp" href="#" target="_blank" class="flex items-center gap-4 p-4 rounded-2xl bg-emerald-50 border border-emerald-100 hover:border-emerald-400 hover:shadow-[0_8px_20px_rgba(16,185,129,0.15)] group transition-all">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
+              <i data-lucide="message-square" class="w-6 h-6"></i>
+            </div>
+            <div class="text-left">
+              <h4 class="font-bold text-emerald-950 text-sm">WhatsApp Directo</h4>
+              <p class="text-emerald-700 text-xs" id="chan-ws-desc">Chat seguro e instantáneo</p>
+            </div>
+            <i data-lucide="chevron-right" class="w-5 h-5 ml-auto text-emerald-400 group-hover:translate-x-1 transition-transform"></i>
+          </a>
+
+          <!-- TELEGRAM -->
+          <a id="channelTelegram" href="#" target="_blank" class="flex items-center gap-4 p-4 rounded-2xl bg-sky-50 border border-sky-100 hover:border-sky-400 hover:shadow-[0_8px_20px_rgba(14,165,233,0.15)] group transition-all">
+            <div class="w-12 h-12 rounded-xl bg-sky-500 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
+              <i data-lucide="send" class="w-6 h-6"></i>
+            </div>
+            <div class="text-left">
+              <h4 class="font-bold text-sky-950 text-sm">Telegram Chat</h4>
+              <p class="text-sky-700 text-xs" id="chan-tg-desc">Mismo número corporativo</p>
+            </div>
+            <i data-lucide="chevron-right" class="w-5 h-5 ml-auto text-sky-400 group-hover:translate-x-1 transition-transform"></i>
+          </a>
+
+          <!-- EMAIL -->
+          <a id="channelGmail" href="#" target="_blank" class="flex items-center gap-4 p-4 rounded-2xl bg-rose-50 border border-rose-100 hover:border-rose-400 hover:shadow-[0_8px_20px_rgba(244,63,94,0.15)] group transition-all">
+            <div class="w-12 h-12 rounded-xl bg-rose-500 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
+              <i data-lucide="mail" class="w-6 h-6"></i>
+            </div>
+            <div class="text-left">
+              <h4 class="font-bold text-rose-950 text-sm">Correo Electrónico</h4>
+              <p class="text-rose-700 text-xs">sophibarcos@gmail.com</p>
+            </div>
+            <i data-lucide="chevron-right" class="w-5 h-5 ml-auto text-rose-400 group-hover:translate-x-1 transition-transform"></i>
+          </a>
+
+        </div>
+
+        <button onclick="closeChannelSelector()" class="w-full mt-6 bg-brandCrema hover:bg-brandNegro/5 text-brandNegro text-xs font-semibold uppercase tracking-wider py-3 rounded-xl transition-all" id="chan-btn-cancel">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- TRADUCCIÓN COMPLETA Y BASE DE DATOS DE NUEVOS SERVICIOS MULTI-IDIOMA -->
+  <script>
+    // Configuración inicial de contacto
+    const phoneNumber = "584228028774"; 
+    const mailToEmail = "sophibarcos@gmail.com";
+    let currentLang = 'es';
+
+    // DICCIONARIO GENERAL DE TRADUCCIONES DEL SITIO WEB
+    const generalTranslations = {
+      es: {
+        navInicio: "Inicio",
+        navServicios: "Servicios",
+        navPlanes: "Planes",
+        navNosotros: "Nosotros",
+        btnContacto: "Contacto",
+        heroTag: "Estudio de Diseño Boutique",
+        heroTitle1: "¿Necesitas un",
+        heroTitleAccent: "sitio web",
+        heroDesc: "Creamos experiencias digitales de alto impacto. Páginas web diseñadas de forma única y exclusiva para que tu marca destaque con sofisticación, elegancia y un rendimiento técnico impecable.",
+        btnExplore: "Explorar Servicios",
+        btnPlanes: "Ver Planes",
+        servicesTag: "Nuestras Especialidades",
+        servicesTitle: "Servicios de Creación Web de Alta Gama",
+        planesTag: "Inversión Inteligente",
+        planesTitle: "Planes Diseñados para Escalar",
+        filoTag: "Por qué nosotros",
+        filoTitle: "No hacemos simples páginas web. <br> Damos <span class='italic text-brandRojo font-bold'>vida digital</span> a tu visión.",
+        filoDesc: "En luizabeth's .studios nos comprometemos con la perfección estética de cada píxel. Creemos en la elegancia visual sin comprometer la velocidad ni la accesibilidad, logrando piezas únicas en internet que impactan en los ojos de tu cliente.",
+        stat1: "Exclusivo a Medida",
+        stat2: "Velocidad de Carga",
+        stat3: "Tiempo En Línea",
+        stat4: "Soporte Dedicado",
+        footerCopy: "&copy; 2026 luizabeth's .studios. Todos los derechos reservados.",
+        footerSub: "Diseño Exclusivo • Hecho con Amor y Píxeles",
+        modalIncludesLabel: "¿Qué incluye el servicio?",
+        modalBtnWant: "¡Lo quiero!",
+        modalBtnBack: "Volver",
+        chanTag: "Canal de Contacto",
+        chanTitle: "Elige tu medio preferido",
+        chanWsDesc: "Chat seguro e instantáneo",
+        chanTgDesc: "Mismo número corporativo",
+        chanBtnCancel: "Cancelar",
+        cardDetails: "Ver Detalles",
+        btnBuyPlan: "Adquirir Plan",
+        btnQuote: "Cotizar Mi Idea",
+        hostingLabel: "de hosting mensual",
+        initialLabel: "de pago inicial"
+      },
+      en: {
+        navInicio: "Home",
+        navServicios: "Services",
+        navPlanes: "Pricing",
+        navNosotros: "About Us",
+        btnContacto: "Contact",
+        heroTag: "Boutique Design Studio",
+        heroTitle1: "Do you need a",
+        heroTitleAccent: "website",
+        heroDesc: "We create high-impact digital experiences. Uniquely and exclusively designed websites to make your brand stand out with sophistication, elegance, and flawless technical performance.",
+        btnExplore: "Explore Services",
+        btnPlanes: "View Plans",
+        servicesTag: "Our Specialties",
+        servicesTitle: "High-End Web Creation Services",
+        planesTag: "Smart Investment",
+        planesTitle: "Plans Designed to Scale",
+        filoTag: "Why Us",
+        filoTitle: "We don't make simple websites. <br> We give <span class='italic text-brandRojo font-bold'>digital life</span> to your vision.",
+        filoDesc: "At luizabeth's .studios we commit ourselves to the aesthetic perfection of every pixel. We believe in visual elegance without compromising speed or accessibility, achieving unique pieces on the internet that captivate your customers.",
+        stat1: "100% Bespoke",
+        stat2: "Load Speed",
+        stat3: "Uptime Guaranteed",
+        stat4: "Dedicated Support",
+        footerCopy: "&copy; 2026 luizabeth's .studios. All rights reserved.",
+        footerSub: "Exclusive Design • Made with Love & Pixels",
+        modalIncludesLabel: "What does this service include?",
+        modalBtnWant: "I want it!",
+        modalBtnBack: "Back",
+        chanTag: "Contact Channel",
+        chanTitle: "Choose your preferred channel",
+        chanWsDesc: "Secure & instant chat",
+        chanTgDesc: "Same corporate number",
+        chanBtnCancel: "Cancel",
+        cardDetails: "View Details",
+        btnBuyPlan: "Buy Plan",
+        btnQuote: "Quote My Idea",
+        hostingLabel: "monthly hosting fee",
+        initialLabel: "down payment"
+      },
+      it: {
+        navInicio: "Home",
+        navServicios: "Servizi",
+        navPlanes: "Piani",
+        navNosotros: "Chi Siamo",
+        btnContacto: "Contatto",
+        heroTag: "Boutique Design Studio",
+        heroTitle1: "Hai bisogno di un",
+        heroTitleAccent: "sito web",
+        heroDesc: "Creiamo esperienze digitali ad alto impatto. Siti web progettati in modo unico ed esclusivo per far risaltare il tuo brand con raffinatezza, eleganza e prestazioni tecniche impeccabili.",
+        btnExplore: "Esplora i Servizi",
+        btnPlanes: "Vedi i Piani",
+        servicesTag: "Le Nostre Specialità",
+        servicesTitle: "Servizi di Creazione Web di Alta Gamma",
+        planesTag: "Investimento Intelligente",
+        planesTitle: "Piani Progettati per Scalare",
+        filoTag: "Perché Noi",
+        filoTitle: "Non creiamo semplici siti web. <br> Diamo <span class='italic text-brandRojo font-bold'>vita digitale</span> alla tua visione.",
+        filoDesc: "In luizabeth's .studios ci impegniamo per la perfezione estetica di ogni singolo pixel. Crediamo nell'eleganza visiva senza compromettere velocità o accessibilità, creando pezzi unici che conquistano i tuoi clienti.",
+        stat1: "Esclusivo su Misura",
+        stat2: "Velocità di Caricamento",
+        stat3: "Tempo Online Garantito",
+        stat4: "Supporto Dedicato",
+        footerCopy: "&copy; 2026 luizabeth's .studios. Tutti i diritti riservati.",
+        footerSub: "Design Esclusivo • Fatto con Amore e Pixel",
+        modalIncludesLabel: "Cosa include questo servizio?",
+        modalBtnWant: "Lo voglio!",
+        modalBtnBack: "Indietro",
+        chanTag: "Canale di Contatto",
+        chanTitle: "Scegli il tuo mezzo preferito",
+        chanWsDesc: "Chat protetta e istantanea",
+        chanTgDesc: "Stesso numero aziendale",
+        chanBtnCancel: "Annulla",
+        cardDetails: "Vedi Dettagli",
+        btnBuyPlan: "Acquista Piano",
+        btnQuote: "Quota la Mia Idea",
+        hostingLabel: "di hosting mensile",
+        initialLabel: "di pagamento iniziale"
+      }
+    };
+
+    // BASE DE DATOS DE LOS 10 SERVICIOS SOLICITADOS (CON IDIOMAS)
+    const serviciosMultiLang = {
+      1: {
+        icon: "shopping-bag",
+        colorClass: "text-brandRojo bg-brandRojo/10",
+        tag: "E-COMMERCE",
+        es: {
+          title: "E-Commerce Boutique",
+          desc: "Desarrollamos tu tienda de ropa o productos de autor con un diseño minimalista, galerías de alta definición y una experiencia fluida.",
+          longDesc: "Diseñamos y desarrollamos tiendas online de alta gama para marcas de moda o productos selectivos. Tu boutique en internet tendrá un catálogo interactivo elegante que resalta el valor y los detalles de cada prenda o artículo, emulando la experiencia de compra de un local físico.",
+          features: [
+            "Diseño minimalista sofisticado centrado en el producto.",
+            "Carga de fotos de alta resolución optimizadas para velocidad.",
+            "Fácil administración de colecciones y categorías.",
+            "Preparado para dispositivos móviles, tablets y ordenadores."
+          ]
+        },
+        en: {
+          title: "Boutique E-Commerce",
+          desc: "We develop your apparel or signature product store with a minimalist design, high-definition galleries, and a seamless experience.",
+          longDesc: "We design and develop high-end online stores for fashion brands or selective products. Your internet boutique will have an elegant interactive catalog that highlights the value and details of each garment or article, emulating the shopping experience of a physical store.",
+          features: [
+            "Sophisticated minimalist design centered on the product.",
+            "High-resolution photo loading optimized for fast speeds.",
+            "Easy administration of collections and categories.",
+            "Ready for mobile devices, tablets, and desktops."
+          ]
+        },
+        it: {
+          title: "E-Commerce Boutique",
+          desc: "Sviluppiamo il tuo negozio di abbigliamento o prodotti d'autore con un design minimalista, gallerie ad alta definizione e un'esperienza fluida.",
+          longDesc: "Progettiamo e sviluppiamo negozi online di fascia alta per marchi di moda o prodotti selettivi. La tua boutique su Internet avrà un elegante catalogo interattivo che evidenzia il valore e i dettagli di ogni capo o articolo, emulando l'esperienza di acquisto di un negozio fisico.",
+          features: [
+            "Design minimalista sofisticato incentrato sul producto.",
+            "Caricamento di foto ad alta risoluzione ottimizzato per la velocità.",
+            "Facile gestione di collezioni e categorie.",
+            "Pronto per dispositivi mobili, tablet e desktop."
+          ]
+        }
+      },
+      2: {
+        icon: "globe",
+        colorClass: "text-brandAzul bg-brandAzul/10",
+        tag: "LANDING PAGES",
+        es: {
+          title: "Landing Pages de Ventas",
+          desc: "Páginas de aterrizaje de alto impacto pensadas para convertir clics publicitarios de redes directamente en clientes.",
+          longDesc: "Páginas diseñadas con una estructura estratégica óptima basada en neuro-diseño para guiar al usuario directo a una acción específica: comprar, reservar o contactarte. Eliminamos todas las distracciones para disparar tus ventas.",
+          features: [
+            "Estructura psicológica enfocada en la conversión rápida.",
+            "Integración de píxeles publicitarios de Facebook, Instagram y TikTok.",
+            "Carga ultra-rápida de menos de 1 segundo.",
+            "Formularios dinámicos y botones de contacto que llaman la atención."
+          ]
+        },
+        en: {
+          title: "High-Conversion Landing Pages",
+          desc: "High-impact landing pages designed to convert social media ad clicks directly into buying customers.",
+          longDesc: "Pages designed with an optimal strategic structure based on neuro-design to guide the user directly to a specific action: buy, reserve, or contact you. We remove all distractions to skyrocket your sales.",
+          features: [
+            "Psychological structure focused on rapid conversion.",
+            "Ad pixel integration for Facebook, Instagram, and TikTok.",
+            "Ultra-fast loading in under 1 second.",
+            "Dynamic forms and eye-catching contact buttons."
+          ]
+        },
+        it: {
+          title: "Landing Page di Vendita",
+          desc: "Pagine di atterraggio ad alto impatto progettate per convertire i clic pubblicitari dei social direttamente in clienti.",
+          longDesc: "Pagine progettate con una estructura strategica ottimale basata sul neuro-design per guidare l'utente direttamente a un'azione specifica: acquistare, prenotare o contattarti. Eliminiamo tutte le distrazioni per far salire alle stelle le tue vendite.",
+          features: [
+            "Struttura psicologica incentrata sulla conversione rapida.",
+            "Integrazione dei pixel pubblicitari per Facebook, Instagram e TikTok.",
+            "Caricamento ultra rapido in meno di 1 secondo.",
+            "Moduli dinamici e pulsanti di contatto accattivanti."
+          ]
+        }
+      },
+      3: {
+        icon: "briefcase",
+        colorClass: "text-brandRojo bg-brandRojo/10",
+        tag: "CORPORATIVO",
+        es: {
+          title: "Webs Corporativas Premium",
+          desc: "Plataformas elegantes de múltiples páginas para proyectar seriedad y captar clientes corporativos de alto valor.",
+          longDesc: "Diseño institucional sofisticado con múltiples secciones donde cuentas tu historia, presentas tus servicios y permites citas automáticas. Todo bajo un ecosistema corporativo protegido con la máxima elegancia digital.",
+          features: [
+            "Estructura multi-sección: Inicio, Nosotros, Servicios, Contacto.",
+            "Integración de sistemas de reserva de citas automatizados.",
+            "Cumplimiento completo de políticas de privacidad y cookies.",
+            "Optimizado para búsquedas corporativas en Google."
+          ]
+        },
+        en: {
+          title: "Premium Corporate Websites",
+          desc: "Elegant multi-page platforms to project credibility and capture high-value corporate clients.",
+          longDesc: "Sophisticated institutional design with multiple sections where you tell your story, present your services, and allow automatic appointments. All under a protected corporate ecosystem with maximum digital elegance.",
+          features: [
+            "Multi-section structure: Home, About, Services, Contact.",
+            "Integration of automated appointment scheduling systems.",
+            "Full compliance with privacy and cookies policies.",
+            "Optimized for corporate searches on Google."
+          ]
+        },
+        it: {
+          title: "Siti Web Aziendali Premium",
+          desc: "Eleganti piattaforme multi-pagina per proiettare serietà e catturare clienti aziendali di alto valore.",
+          longDesc: "Design istituzionale sofisticato con più sezioni in cui racconti la tua storia, presents i tuoi servizi e consenti appuntamenti automatici. Il tutto in un ecosistema aziendale protetto con la massima eleganza digitale.",
+          features: [
+            "Struttura multi-sezione: Home, Chi Siamo, Servizi, Contatti.",
+            "Integrazione di sistemi automatici di prenotazione appuntamenti.",
+            "Piena conformità alle policy sulla privacy e sui cookie.",
+            "Ottimizzato per ricerche aziendali su Google."
+          ]
+        }
+      },
+      4: {
+        icon: "layout",
+        colorClass: "text-brandAzul bg-brandAzul/10",
+        tag: "DASHBOARD",
+        es: {
+          title: "Dashboards e Interfaces",
+          desc: "Diseñamos paneles de control interactivos y hermosos para gestionar datos, inventarios o métricas internas de tu negocio.",
+          longDesc: "Creación de interfaces limpias, paneles de estadísticas visuales (gráficos de ventas, control de usuarios) con un enfoque en la usabilidad y un diseño estético moderno que simplifica el control de tu empresa.",
+          features: [
+            "Diseño de interfaz de usuario (UI/UX) ultra limpio.",
+            "Gráficos de datos interactivos y dinámicos.",
+            "Manejo simple e intuitivo para usuarios sin conocimientos técnicos.",
+            "Diseño completamente adaptado a tabletas y ordenadores."
+          ]
+        },
+        en: {
+          title: "Interactive Dashboards",
+          desc: "We design beautiful, interactive control panels to manage your business data, inventories, or internal metrics.",
+          longDesc: "Creation of clean interfaces, visual statistics panels (sales charts, user control) with a focus on usability and a modern aesthetic design that simplifies your business control.",
+          features: [
+            "Ultra-clean UI/UX user interface design.",
+            "Interactive and dynamic data charts.",
+            "Simple and intuitive handling for non-technical users.",
+            "Design fully adapted to tablets and desktops."
+          ]
+        },
+        it: {
+          title: "Dashboard e Interfacce",
+          desc: "Progettiamo pannelli di controllo interattivi e splendidi per gestire dati, inventari o metriche interne della tua azienda.",
+          longDesc: "Creazione di interfacce pulite, pannelli di statistiche visive (grafici delle vendite, controllo utenti) con particolare attenzione all'usabilità e un design estetico moderno que semplifica il controllo aziendale.",
+          features: [
+            "Design dell'interfaccia utente (UI/UX) ultra pulito.",
+            "Grafici di dati interattivi e dinamici.",
+            "Gestione semplice e intuitiva per utenti non tecnici.",
+            "Design completamente adaptato a tablet e desktop."
+          ]
+        }
+      },
+      5: {
+        icon: "sparkles",
+        colorClass: "text-brandRojo bg-brandRojo/10",
+        tag: "CREATIVOS",
+        es: {
+          title: "Portafolios de Autor",
+          desc: "Galerías fluidas y minimalistas ideales para que fotógrafos, modelos, artistas y diseñadores muestren sus obras.",
+          longDesc: "Tu arte merece el mejor marco posible en internet. Diseñamos galerías dinámicas sin retardo que cargan tus trabajos en alta resolución con animaciones estéticas sutiles.",
+          features: [
+            "Efectos visuales fluidos al pasar el cursor y abrir imágenes.",
+            "Optimización extrema de compresión de imágenes sin pérdida de color.",
+            "Narrativa de marca en la sección sobre mí.",
+            "Botones directos para contratación rápida."
+          ]
+        },
+        en: {
+          title: "Author Portfolios",
+          desc: "Fluid and minimalist galleries, perfect for photographers, models, artists, and designers to showcase their work.",
+          longDesc: "Your art deserves the best frame on the internet. We design dynamic, lag-free galleries that load your high-resolution work with subtle, aesthetic animations.",
+          features: [
+            "Fluid visual effects on hover and image opening.",
+            "Extreme image compression optimization with no loss of color.",
+            "Brand storytelling in the 'About Me' section.",
+            "Direct buttons for fast hiring."
+          ]
+        },
+        it: {
+          title: "Portfolio d'Autore",
+          desc: "Gallerie fluide e minimaliste ideali per fotografi, modelli, artisti e designer per mostrare le loro opere.",
+          longDesc: "La tua arte merita la migliore cornice possibile su Internet. Progettiamo gallerie dinamiche e prive di ritardi che caricano le tue opere ad alta risoluzione con sottili animazioni estetiche.",
+          features: [
+            "Effetti visivi fluidi al passaggio del mouse e all'apertura delle immagini.",
+            "Ottimizzazione estrema della compressione delle immagini senza perdita di colore.",
+            "Storytelling del marchio nella sezione 'Chi Sono'.",
+            "Pulsanti diretti per assunzioni rapide."
+          ]
+        }
+      },
+      6: {
+        icon: "search",
+        colorClass: "text-brandAzul bg-brandAzul/10",
+        tag: "OPTIMIZACIÓN",
+        es: {
+          title: "SEO Especializado de Élite",
+          desc: "Estrategias de posicionamiento avanzadas para asegurar los primeros lugares en búsquedas orgánicas de Google.",
+          longDesc: "Analizamos las palabras clave de tu competencia directa, estructuramos tu sitio web y optimizamos el código para garantizar un excelente posicionamiento natural y atraer miles de visitas sin pagar publicidad.",
+          features: [
+            "Estudio de palabras clave de alto impacto.",
+            "Optimización On-Page (títulos, etiquetas, meta descripciones).",
+            "Instalación de Google Analytics 4 y Search Console.",
+            "Optimización de velocidad según estándares Core Web Vitals."
+          ]
+        },
+        en: {
+          title: "Elite Specialized SEO",
+          desc: "Advanced positioning strategies to secure top spots in organic Google searches.",
+          longDesc: "We analyze your direct competitors' keywords, structure your website, and optimize the code to guarantee excellent organic search positioning and attract thousands of visits without paying for ads.",
+          features: [
+            "High-impact keyword research.",
+            "On-Page optimization (titles, tags, meta descriptions).",
+            "Setup of Google Analytics 4 and Search Console.",
+            "Speed optimization based on Core Web Vitals standards."
+          ]
+        },
+        it: {
+          title: "SEO Specializzato d'Elite",
+          desc: "Strategie di posizionamento avanzate per assicurarsi le prime posizioni nelle ricerche organiche di Google.",
+          longDesc: "Analizziamo le parole chiave della tua concorrenza diretta, strutturiamo il tuo sitio web e ottimizziamo il codice per garantire un eccellente posizionamiento naturale e attirare migliaia di visite senza pagare pubblicità.",
+          features: [
+            "Studio di parole chiave ad alto impatto.",
+            "Ottimizzazione On-Page (titoli, tag, meta descrizioni).",
+            "Configurazione di Google Analytics 4 e Search Console.",
+            "Ottimizzazione della velocità in base agli standard Core Web Vitals."
+          ]
+        }
+      },
+      7: {
+        icon: "refresh-cw",
+        colorClass: "text-brandRojo bg-brandRojo/10",
+        tag: "REDiseño",
+        es: {
+          title: "Rediseño de Marca Web",
+          desc: "Le damos una nueva cara moderna a tu web antigua, adaptándola a la identidad visual sofisticada actual de tu marca.",
+          longDesc: "Si tu web actual luce descuidada o difícil de usar, realizamos una re-arquitectura visual completa adaptando tus colores, tipografía e inyectándole un estilo moderno e interactivo para aumentar tu credibilidad.",
+          features: [
+            "Estudio y corrección de problemas de usabilidad del sitio antiguo.",
+            "Migración segura de textos e imágenes sin perder posicionamiento.",
+            "Diseño adaptado a los estándares estéticos contemporáneos.",
+            "Mejora dramática en el porcentaje de conversión de visitantes."
+          ]
+        },
+        en: {
+          title: "Web Brand Redesign",
+          desc: "We give a new modern face to your old website, adapting it to your brand's current sophisticated visual identity.",
+          longDesc: "If your current website looks outdated or is hard to use, we perform a complete visual re-architecture, adapting your colors, typography, and injecting a modern and interactive style to increase your credibility.",
+          features: [
+            "Study and correction of old site usability issues.",
+            "Secure migration of text and images without losing search ranking.",
+            "Design adapted to contemporary aesthetic standards.",
+            "Dramatic improvement in visitor conversion rate."
+          ]
+        },
+        it: {
+          title: "Restyling del Marchio Web",
+          desc: "Diamo una nuova veste moderna al tuo vecchio sito, adattandolo all'attuale sofisticata identità visiva del tuo brand.",
+          longDesc: "Se il tuo sito attuale appare obsoleto o difficile da usare, eseguiamo una riprogettazione visiva completa, adattando i tuoi colori, la tipografia e iniettando uno stile moderno e interattivo per aumentare la tua credibilidad.",
+          features: [
+            "Studio e correzione dei problemi di usabilità del vecchio sito.",
+            "Migrazione sicura di testi e immagini senza perdere il posizionamiento sui motori.",
+            "Design adattato ai contemporanei standard estetici.",
+            "Drammatico miglioramento del tasso di conversione dei visitatori."
+          ]
+        }
+      },
+      8: {
+        icon: "plus-circle",
+        colorClass: "text-brandAzul bg-brandAzul/10",
+        tag: "CMS",
+        es: {
+          title: "Webs Autoadministrables",
+          desc: "Paneles visuales intuitivos que te permiten cambiar textos, fotos u ofertas en pocos segundos sin necesidad de programar.",
+          longDesc: "Te brindamos independencia absoluta. Desarrollamos la plataforma con editores visuales amigables para que tú mismo actualices contenidos, subas novedades o modifiques productos cuando desees.",
+          features: [
+            "Estructura robusta inmune a errores accidentales.",
+            "Video-tutoriales exclusivos grabados paso a paso de tu web.",
+            "Múltiples perfiles de editores para tu equipo de trabajo.",
+            "Carga de nuevos productos o contenidos con dos clics."
+          ]
+        },
+        en: {
+          title: "Self-Managed Websites",
+          desc: "Intuitive visual panels that allow you to change texts, photos, or offers in seconds without programming.",
+          longDesc: "We offer you absolute independence. We develop the platform with user-friendly visual editors so you can update content, upload news, or modify products whenever you want.",
+          features: [
+            "Robust structure immune to accidental layout breaks.",
+            "Exclusive step-by-step video tutorials recorded for your site.",
+            "Multiple editor profiles for your team.",
+            "Upload new products or content with just two clicks."
+          ]
+        },
+        it: {
+          title: "Siti Web Autogestiti",
+          desc: "Pannelli visivi intuitivi che consentono di modificare testi, foto o offerte in pochi secondi senza programmazione.",
+          longDesc: "Ti offriamo un'indipendenza assoluta. Sviluppiamo la plataforma con editor visivi intuitivi in modo che tu possa aggiornare i contenuti, caricare novità o modificare i prodotti ogni volta che lo desideri.",
+          features: [
+            "Struttura robusta immune da rotture accidentali del layout.",
+            "Video tutorial esclusivo passo-passo registrato per il tuo sito.",
+            "Profili di editor multipli per il tuo team.",
+            "Caricamento di nuovi prodotti o contenidos con due soli clic."
+          ]
+        }
+      },
+      9: {
+        icon: "shield-check",
+        colorClass: "text-brandRojo bg-brandRojo/10",
+        tag: "PROTECCIÓN",
+        es: {
+          title: "Soporte & Mantenimiento",
+          desc: "Monitoreo continuo para garantizar que tu sitio web esté siempre en línea, seguro y libre de errores informáticos.",
+          longDesc: "Nos encargamos del trabajo duro por ti. Realizamos monitoreos preventivos constantes, copias de seguridad semanales automáticas y actualizamos el sistema para mantenerlo rápido y blindado contra amenazas digitales.",
+          features: [
+            "Actualizaciones periódicas de seguridad del sistema.",
+            "Respaldos de seguridad de toda la base de datos semanalmente.",
+            "Monitoreo 24/7 de caídas de servidor.",
+            "Soporte inmediato por canales de mensajería directa."
+          ]
+        },
+        en: {
+          title: "Support & Maintenance",
+          desc: "Continuous monitoring to ensure your website is always online, secure, and free from bugs.",
+          longDesc: "We take care of the hard work for you. We perform constant preventive monitoring, automatic weekly backups, and system updates to keep your site fast and shielded against digital threats.",
+          features: [
+            "Regular system security updates.",
+            "Weekly automated backups of your database.",
+            "24/7 server downtime monitoring.",
+            "Immediate support via direct messaging channels."
+          ]
+        },
+        it: {
+          title: "Supporto e Manutenzione",
+          desc: "Monitoraggio continuo per garantire che il tuo sito sia sempre online, sicuro e privo di errori informatici.",
+          longDesc: "Ci prendiamo cura del lavoro duro per te. Eseguiamo costanti monitoraggi preventivi, backup automatici settimanali e aggiornamenti di sistema per mantenere il tuo sito veloce e schermato contro le minacce informatiche.",
+          features: [
+            "Aggiornamenti periodici della sicurezza del sistema.",
+            "Backup automatici settimanali del database.",
+            "Monitoraggio 24/7 dei tempi di inattività del server.",
+            "Supporto immediato tramite canali di messaggistica diretta."
+          ]
+        }
+      },
+      10: {
+        icon: "zap",
+        colorClass: "text-brandAzul bg-brandAzul/10",
+        tag: "SISTEMAS",
+        es: {
+          title: "Aplicaciones Web Pro",
+          desc: "Sistemas interactivos complejos con bases de datos adaptadas a las reglas de negocio únicas de tu empresa.",
+          longDesc: "Para proyectos digitales de gran escala que requieren procesamiento de datos personalizado, integraciones de API avanzadas o desarrollo de herramientas y portales de usuario complejos.",
+          features: [
+            "Desarrollo de código robusto, limpio y escalable.",
+            "Diseño de bases de datos seguras de alta velocidad.",
+            "Conexión con servicios de terceros y pasarelas lógicas.",
+            "Garantía de rendimiento excepcional ante un gran número de usuarios."
+          ]
+        },
+        en: {
+          title: "Pro Web Applications",
+          desc: "Complex interactive systems with databases adapted to the unique business rules of your company.",
+          longDesc: "For large-scale digital projects requiring custom data processing, advanced API integrations, or complex development of tools and user portals.",
+          features: [
+            "Bespoke development of robust, clean, and scalable code.",
+            "High-speed, secure database design.",
+            "Connection with third-party APIs and logic gateways.",
+            "Guaranteed exceptional performance under heavy user loads."
+          ]
+        },
+        it: {
+          title: "Applicazioni Web Pro",
+          desc: "Sistemi interattivi complessi con database adatti alle regole di business uniche della tua azienda.",
+          longDesc: "Per progetti digitali su larga scala che richiedono l'elaborazione di dati personalizzati, integrazioni API avanzate o lo sviluppo di strumenti e portali utente complessi.",
+          features: [
+            "Sviluppo di codice robusto, pulito e scalabile su misura.",
+            "Progettazione di database sicuri ad alta velocità.",
+            "Collegamento con API esterne e gateway di logica.",
+            "Prestazioni eccezionali garantite in presenza di elevati carichi di utenti."
+          ]
+        }
+      }
+    };
+
+    // BASE DE DATOS DE LOS PLANES (CON IDIOMAS - RESTAURADO CON LA OPCIÓN SIGNATURE)
+    const planesMultiLang = [
+      {
+        id: "lite",
+        tag: "LITE",
+        price: "$40",
+        hosting: "$50",
+        colorClass: "border border-brandNegro/10 bg-brandCrema/20",
+        isPopular: false,
+        es: {
+          title: "Plan Studio-Lite",
+          desc: "Perfecto para profesionales independientes y marcas personales que inician de manera sólida.",
+          btn: "Adquirir Plan Lite",
+          features: [
+            "Diseño estilizado de One-Page",
+            "Adaptabilidad móvil fluida",
+            "Integración de canales interactivos",
+            "SEO Técnico Básico"
+          ],
+          msg: "¡Hola luizabeth's .studios! Estoy muy interesado en contratar el Plan Studio-Lite de $40 iniciales y $50 de hosting mensual. ¿Cuáles son los siguientes pasos?"
+        },
+        en: {
+          title: "Plan Studio-Lite",
+          desc: "Perfect for independent professionals and personal brands starting out strong.",
+          btn: "Get Plan Lite",
+          features: [
+            "Stylized One-Page Design",
+            "Fluid Mobile Responsiveness",
+            "Integration of Interactive Channels",
+            "Basic Technical SEO"
+          ],
+          msg: "Hello luizabeth's .studios! I am very interested in hiring the Studio-Lite Plan for $40 down payment and $50 monthly hosting. What are the next steps?"
+        },
+        it: {
+          title: "Piano Studio-Lite",
+          desc: "Perfetto per liberi professionisti e marchi personali che iniziano in modo solido.",
+          btn: "Acquista Piano Lite",
+          features: [
+            "Design di una singola pagina stilizzato",
+            "Fluidità reattiva per i dispositivi mobili",
+            "Integrazione dei canali interattivi",
+            "SEO Tecnico di Base"
+          ],
+          msg: "Ciao luizabeth's .studios! Sono molto interessato ad acquistare il Piano Studio-Lite a $40 iniziali e $50 di hosting mensile. Quali sono i prossimi passi?"
+        }
+      },
+      {
+        id: "studio",
+        tag: "RECOMMENDED",
+        price: "$100",
+        hosting: "$30",
+        colorClass: "border-2 border-brandRojo bg-brandCrema relative shadow-xl transform",
+        isPopular: true,
+        es: {
+          title: "Plan Brand-Studio",
+          desc: "El balance perfecto para marcas y e-commerce de moda en pleno crecimiento.",
+          btn: "Adquirir Plan Studio",
+          features: [
+            "Hasta 5 secciones internas",
+            "Pasarela de pago y catálogo integrado",
+            "Gestor autoadministrable (CMS)",
+            "Estrategia SEO de élite",
+            "1 mes de soporte post-lanzamiento"
+          ],
+          msg: "¡Hola luizabeth's .studios! Deseo adquirir el Plan Brand-Studio de $100 iniciales y $30 de hosting mensual para impulsar mi negocio."
+        },
+        en: {
+          title: "Plan Brand-Studio",
+          desc: "The perfect balance for growing fashion brands and e-commerce stores.",
+          btn: "Get Plan Studio",
+          features: [
+            "Up to 5 internal sections",
+            "Integrated payment gateway & catalog",
+            "Self-Managed CMS",
+            "Elite SEO Strategy",
+            "1 month of post-launch support"
+          ],
+          msg: "Hello luizabeth's .studios! I would like to buy the Brand-Studio Plan for $100 down payment and $30 monthly hosting to boost my store."
+        },
+        it: {
+          title: "Piano Brand-Studio",
+          desc: "Il perfetto equilibrio per marchi di moda ed e-commerce in crescita.",
+          btn: "Acquista Piano Studio",
+          features: [
+            "Fino a 5 sezioni interne",
+            "Gateway di pagamento e catalogo integrati",
+            "Gestione dei contenuti CMS autonoma",
+            "Strategia SEO d'Elite",
+            "1 mese di supporto post-lancio"
+          ],
+          msg: "Ciao luizabeth's .studios! Desidero acquistare il Piano Brand-Studio a $100 iniziali e $30 di hosting mensile per lanciare il mio e-commerce."
+        }
+      },
+      {
+        id: "signature",
+        tag: "EXCLUSIVO",
+        price: "Custom",
+        hosting: "Sujeto a Proyecto",
+        colorClass: "border border-brandNegro/10 bg-brandCrema/20",
+        isPopular: false,
+        es: {
+          title: "Luizabeth's Signature",
+          desc: "Plataformas Web y Aplicaciones a medida de alto tráfico y máxima seguridad.",
+          btn: "Cotizar Mi Idea",
+          features: [
+            "Estructura multi-idioma (ES/EN/IT)",
+            "Integraciones de API complejas",
+            "Animaciones exclusivas y personalizadas",
+            "Soporte Premium 24/7 permanente"
+          ],
+          msg: "¡Hola luizabeth's .studios! Tengo una idea de tienda online personalizada de alta gama y me gustaría cotizarla bajo su plan Signature."
+        },
+        en: {
+          title: "Luizabeth's Signature",
+          desc: "Custom high-traffic and maximum-security web platforms and applications.",
+          btn: "Quote My Idea",
+          features: [
+            "Multi-language structure (ES/EN/IT)",
+            "Complex API integrations",
+            "Exclusive and custom animations",
+            "Permanent 24/7 Premium Support"
+          ],
+          msg: "Hello luizabeth's .studios! I have a custom high-end idea and would like to quote it under your Signature plan."
+        },
+        it: {
+          title: "Luizabeth's Signature",
+          desc: "Piattaforme e applicazioni web su misura ad alto traffico e massima sicurezza.",
+          btn: "Quota la Mia Idea",
+          features: [
+            "Struttura multi-lingua (ES/EN/IT)",
+            "Integrazioni API complesse",
+            "Animazioni esclusive e personalizzate",
+            "Supporto Premium 24/7 permanente"
+          ],
+          msg: "Ciao luizabeth's .studios! Ho un'idea su misura e vorrei quotarla nell'ambito del vostro piano Signature di alta gamma."
+        }
+      }
+    ];
+
+    // FUNCIÓN PARA RENDERIZAR TODO EL SITIO SEGÚN EL IDIOMA SELECCIONADO
+    function renderSite() {
+      const texts = generalTranslations[currentLang];
+
+      // Traducir Navbar
+      document.getElementById('nav-inicio').textContent = texts.navInicio;
+      document.getElementById('nav-servicios').textContent = texts.navServicios;
+      document.getElementById('nav-planes').textContent = texts.navPlanes;
+      document.getElementById('nav-nosotros').textContent = texts.navNosotros;
+      document.getElementById('btn-contacto').querySelector('span').textContent = texts.btnContacto;
+
+      // Traducir Hero
+      document.getElementById('hero-tag').textContent = texts.heroTag;
+      document.getElementById('hero-title-1').textContent = texts.heroTitle1;
+      document.getElementById('hero-title-accent').textContent = texts.heroTitleAccent;
+      document.getElementById('hero-desc').textContent = texts.heroDesc;
+      document.getElementById('btn-explore').textContent = texts.btnExplore;
+      document.getElementById('btn-planes').textContent = texts.btnPlanes;
+
+      // Traducir Encabezado de Servicios y Planes
+      document.getElementById('services-tag').textContent = texts.servicesTag;
+      document.getElementById('services-title').textContent = texts.servicesTitle;
+      document.getElementById('planes-tag').textContent = texts.planesTag;
+      document.getElementById('planes-title').textContent = texts.planesTitle;
+
+      // Traducir Filosofía y Stats
+      document.getElementById('filo-tag').textContent = texts.filoTag;
+      document.getElementById('filo-title').innerHTML = texts.filoTitle;
+      document.getElementById('filo-desc').textContent = texts.filoDesc;
+      document.getElementById('stat-1').textContent = texts.stat1;
+      document.getElementById('stat-2').textContent = texts.stat2;
+      document.getElementById('stat-3').textContent = texts.stat3;
+      document.getElementById('stat-4').textContent = texts.stat4;
+
+      // Footer
+      document.getElementById('footer-copy').innerHTML = texts.footerCopy;
+      document.getElementById('footer-sub').textContent = texts.footerSub;
+
+      // Traducciones estáticas de Modales
+      document.getElementById('modal-includes-label').textContent = texts.modalIncludesLabel;
+      document.getElementById('modal-btn-want').textContent = texts.modalBtnWant;
+      document.getElementById('modal-btn-back').textContent = texts.modalBtnBack;
+      document.getElementById('chan-tag').textContent = texts.chanTag;
+      document.getElementById('chan-title').textContent = texts.chanTitle;
+      document.getElementById('chan-ws-desc').textContent = texts.chanWsDesc;
+      document.getElementById('chan-tg-desc').textContent = texts.chanTgDesc;
+      document.getElementById('chan-btn-cancel').textContent = texts.chanBtnCancel;
+
+      // RENDERIZAR LAS 10 TARJETAS DE SERVICIOS
+      const grid = document.getElementById('servicesGrid');
+      grid.innerHTML = '';
+
+      Object.keys(serviciosMultiLang).forEach((id, index) => {
+        const item = serviciosMultiLang[id];
+        const langData = item[currentLang];
+        
+        const card = document.createElement('div');
+        card.setAttribute('onclick', `openModal(${id})`);
+        
+        // La tarjeta número 10 se centrará usando reglas condicionales de Tailwind en pantallas grandes
+        let gridClasses = "group bg-white rounded-3xl p-8 border border-brandNegro/[0.06] hover:border-brandRojo/50 shadow-sm hover:shadow-[0_20px_50px_rgba(209,26,26,0.12)] hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col justify-between h-[340px] relative overflow-hidden";
+        if (parseInt(id) === 10) {
+          gridClasses += " lg:col-start-2 lg:col-span-1";
+        }
+        
+        card.className = gridClasses;
+        
+        card.innerHTML = `
+          <div class="absolute -right-10 -top-10 w-32 h-32 bg-brandRojo/5 rounded-full group-hover:bg-brandRojo/15 group-hover:scale-125 transition-all duration-500"></div>
+          <div>
+            <div class="flex justify-between items-start mb-6">
+              <div class="w-14 h-14 rounded-2xl ${item.colorClass} flex items-center justify-center text-brandRojo group-hover:rotate-12 transition-transform">
+                <i data-lucide="${item.icon}" class="w-7 h-7"></i>
+              </div>
+              <span class="text-[10px] font-bold tracking-widest uppercase text-brandRojo bg-brandRojo/10 px-3 py-1 rounded-full">${item.tag}</span>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-brandNegro group-hover:text-brandRojo transition-colors mb-3">
+              ${langData.title}
+            </h3>
+            <p class="text-brandGris text-sm leading-relaxed line-clamp-3">
+              ${langData.desc}
+            </p>
+          </div>
+          <span class="text-brandRojo font-semibold text-xs tracking-wider uppercase inline-flex items-center gap-1 mt-4 group-hover:translate-x-2 transition-transform">
+            ${texts.cardDetails} <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+          </span>
+        `;
+        grid.appendChild(card);
+      });
+
+      // RENDERIZAR LAS TARJETAS DE PLANES (ACTUALIZADOS CON EL NUEVO FORMATO DE PRECIOS Y SIGNATURE RESTAURADO)
+      const planesGrid = document.getElementById('planesGrid');
+      planesGrid.innerHTML = '';
+
+      planesMultiLang.forEach(plan => {
+        const langData = plan[currentLang];
+        const planCard = document.createElement('div');
+        planCard.className = `${plan.colorClass} rounded-2xl p-8 flex flex-col justify-between relative`;
+
+        let popularBadge = '';
+        if (plan.isPopular) {
+          popularBadge = `
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brandRojo text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg">
+              ${plan.tag}
+            </div>
+          `;
+        }
+
+        let featuresListHTML = '';
+        langData.features.forEach(feat => {
+          featuresListHTML += `
+            <li class="flex items-center gap-3 text-sm text-brandGris">
+              <i data-lucide="check" class="w-4 h-4 text-brandRojo flex-shrink-0"></i>
+              <span>${feat}</span>
+            </li>
+          `;
+        });
+
+        // Configuración condicional para etiquetas de precio del hosting en Signature
+        let hostingSubText = texts.hostingLabel;
+        if (plan.id === 'signature') {
+          hostingSubText = currentLang === 'es' ? 'Sujeto a requerimiento' : (currentLang === 'it' ? 'Soggetto a requisiti' : 'Subject to requirements');
+        }
+
+        planCard.innerHTML = `
+          ${popularBadge}
+          <div>
+            <span class="text-brandAzul font-bold text-xs uppercase tracking-widest block mb-4">${plan.tag}</span>
+            <h3 class="font-serif text-2xl font-bold mb-2">${langData.title}</h3>
+            <p class="text-brandGris text-sm mb-6">${langData.desc}</p>
+            <div class="mb-8 flex flex-col gap-1">
+              <div>
+                <span class="text-4xl font-serif font-bold text-brandNegro">${plan.price}</span>
+                <span class="text-brandGris text-xs ml-1">${plan.price !== 'Custom' ? texts.initialLabel : (currentLang === 'es' ? 'A convenir' : 'Bespoke')}</span>
+              </div>
+              <div class="border-t border-brandNegro/10 pt-2 mt-1">
+                <span class="text-xl font-serif font-bold text-brandRojo">${plan.hosting}</span>
+                <span class="text-brandGris text-xs ml-1">${hostingSubText}</span>
+              </div>
+            </div>
+            <ul class="space-y-4 mb-8">
+              ${featuresListHTML}
+            </ul>
+          </div>
+          <!-- Se eliminaron comillas conflictivas usando selectores basados en ID en lugar de onclick inline para evitar errores de sintaxis -->
+          <button data-plan-id="${plan.id}" 
+                  class="plan-btn-action w-full py-3.5 px-4 rounded-xl text-center text-sm font-semibold ${plan.isPopular ? 'bg-brandRojo hover:bg-brandNegro text-white shadow-md shadow-brandRojo/20' : 'bg-brandNegro hover:bg-brandRojo text-white'} transition-all">
+            ${langData.btn}
+          </button>
+        `;
+        planesGrid.appendChild(planCard);
+      });
+
+      // Asignar los escuchadores de eventos dinámicos para los botones de los planes y evitar errores de sintaxis por comillas simples
+      const planButtons = document.querySelectorAll('.plan-btn-action');
+      planButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const planId = this.getAttribute('data-plan-id');
+          const selectedPlan = planesMultiLang.find(p => p.id === planId);
+          if (selectedPlan) {
+            const planLangData = selectedPlan[currentLang];
+            openChannelSelector(planLangData.title, planLangData.msg);
+          }
+        });
+      });
+
+      // Volver a renderizar los iconos cargados dinámicamente con Lucide
+      lucide.createIcons();
+    }
+
+    // Cambiar idioma globalmente
+    function changeLanguage(lang) {
+      currentLang = lang;
+      renderSite();
+    }
+
+    // Ejecutar render inicial
+    window.onload = function() {
+      renderSite();
+    };
+  </script>
+
+  <!-- LÓGICA DE CONTROL DE VENTANAS EMERGENTES (MODALES) -->
+  <script>
+    const modal = document.getElementById('serviceModal');
+    const modalContent = modal.querySelector('.scale-95');
+
+    const channelSelectorModal = document.getElementById('channelSelectorModal');
+    const channelSelectorContent = channelSelectorModal.querySelector('.scale-95');
+
+    // Función para abrir el modal de un servicio con traducción interactiva
+    function openModal(serviceId) {
+      const data = serviciosMultiLang[serviceId];
+      if (!data) return;
+
+      const langData = data[currentLang];
+
+      // Cambiar Título, descripción e ícono en el modal
+      document.getElementById('modalTitle').textContent = langData.title;
+      document.getElementById('modalDescription').textContent = langData.longDesc;
+      
+      // Actualizar contenedor del ícono con sus clases de color
+      const iconContainer = document.getElementById('modalIconContainer');
+      iconContainer.className = `w-16 h-16 rounded-2xl flex items-center justify-center mb-6 ${data.colorClass}`;
+      iconContainer.innerHTML = `<i data-lucide="${data.icon}" class="w-8 h-8"></i>`;
+
+      // Cargar lista de características detalladas
+      const featuresList = document.getElementById('modalFeatures');
+      featuresList.innerHTML = '';
+      langData.features.forEach(feat => {
+        const li = document.createElement('li');
+        li.className = "flex items-center gap-3";
+        li.innerHTML = `<i data-lucide="check" class="w-4 h-4 text-brandRojo flex-shrink-0"></i><span>${feat}</span>`;
+        featuresList.appendChild(li);
+      });
+
+      // Configurar el llamado al selector de canal con mensaje dinámico traducido
+      let targetMsg = "";
+      if (currentLang === 'es') {
+        targetMsg = `¡Hola luizabeth's .studios! Me gustaría contratar el servicio premium de: "${langData.title}". Me pareció fantástico lo que vi en su web.`;
+      } else if (currentLang === 'it') {
+        targetMsg = `Ciao luizabeth's .studios! Vorrei richiedere il servizio premium di: "${langData.title}". Ho trovato fantastica la vostra proposta sul sito.`;
+      } else {
+        targetMsg = `Hello luizabeth's .studios! I am interested in booking the premium service: "${langData.title}" which I saw on your website.`;
+      }
+
+      const loQuieroBtn = document.getElementById('modalLoQuieroButton');
+      loQuieroBtn.onclick = function() {
+        closeModal();
+        setTimeout(() => {
+          openChannelSelector(langData.title, targetMsg);
+        }, 350);
+      };
+
+      // Re-renderizar iconos en el modal dinámico
+      lucide.createIcons();
+
+      // Enciende el modal
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modalContent.classList.remove('scale-95');
+      modalContent.classList.add('scale-100');
+      document.body.classList.add('modal-open');
+    }
+
+    function closeModal() {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modalContent.classList.remove('scale-100');
+      modalContent.classList.add('scale-95');
+      document.body.classList.remove('modal-open');
+    }
+
+    // ABRIR EL SELECTOR DE CANALES
+    function openChannelSelector(itemName, customMessage) {
+      document.getElementById('channelSelectorSub').textContent = `${currentLang === 'es' ? 'Contratando:' : (currentLang === 'it' ? 'Contrattando:' : 'Booking:')} ${itemName}`;
+      
+      const encodedMsg = encodeURIComponent(customMessage);
+      
+      // Enlaces dinámicos
+      const whatsAppURL = `https://wa.me/${phoneNumber}?text=${encodedMsg}`;
+      const telegramURL = `https://t.me/+${phoneNumber}`;
+      const gmailURL = `mailto:${mailToEmail}?subject=Interés%20en%20${encodeURIComponent(itemName)}&body=${encodedMsg}`;
+
+      document.getElementById('channelWhatsApp').setAttribute('href', whatsAppURL);
+      document.getElementById('channelTelegram').setAttribute('href', telegramURL);
+      document.getElementById('channelGmail').setAttribute('href', gmailURL);
+
+      // Abrir Modal Selector
+      channelSelectorModal.classList.remove('opacity-0', 'pointer-events-none');
+      channelSelectorContent.classList.remove('scale-95');
+      channelSelectorContent.classList.add('scale-100');
+      document.body.classList.add('modal-open');
+    }
+
+    function closeChannelSelector() {
+      channelSelectorModal.classList.add('opacity-0', 'pointer-events-none');
+      channelSelectorContent.classList.remove('scale-100');
+      channelSelectorContent.classList.add('scale-95');
+      if (modal.classList.contains('opacity-0')) {
+        document.body.classList.remove('modal-open');
+      }
+    }
+
+    // Contacto General desde Botones de Navbar / Hero
+    function triggerGeneralContact() {
+      let defaultMsg = "¡Hola luizabeth's .studios! Vengo de su sitio web y me gustaría ponerme en contacto con ustedes.";
+      if (currentLang === 'en') {
+        defaultMsg = "Hello luizabeth's .studios! I came from your website and would love to get in touch with you.";
+      } else if (currentLang === 'it') {
+        defaultMsg = "Ciao luizabeth's .studios! Vengo dal vostro sito web e vorrei mettermi in contatto con voi.";
+      }
+      openChannelSelector("Contacto General / General Contact", defaultMsg);
+    }
+
+    // Eventos para cerrar haciendo clic en el fondo oscuro
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+    channelSelectorModal.addEventListener('click', function(e) {
+      if (e.target === channelSelectorModal) closeChannelSelector();
+    });
+
+    // Cerrar con Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+        closeChannelSelector();
+      }
+    });
+  </script>
+
+</body>
+</html>
