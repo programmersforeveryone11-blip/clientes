@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>luizabeth's .studios | Diseño & Desarrollo Web Premium</title>
-  <!-- Tailwind CSS para diseño rápido yx moderno -->
+  <!-- Tailwind CSS para diseño rápido y moderno -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Playfair Display (Serif elegante como el logo) y DM Sans (Sans-serif limpia) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -229,7 +229,7 @@
       </div>
       <h3 class="font-serif text-3xl md:text-5xl font-medium tracking-tight mb-8" id="filo-title">
         No hacemos simples páginas web. <br>
-        Damos <span class="italic text-brandRojo font-bold">vida digital</span> a tu visión.
+        Damos <span class='italic text-brandRojo font-bold'>vida digital</span> a tu visión.
       </h3>
       <p class="text-brandCrema/60 max-w-3xl mx-auto leading-relaxed text-base md:text-lg mb-12" id="filo-desc">
         En luizabeth's .studios nos comprometemos con la perfección estética de cada píxel. Creemos en la elegancia visual sin comprometer la velocidad ni la accesibilidad, logrando piezas únicas en internet que impactan en los ojos de tu cliente.
@@ -626,7 +626,7 @@
           features: [
             "Estructura psicológica enfocada en la conversión rápida.",
             "Integración de píxeles publicitarios de Facebook, Instagram y TikTok.",
-            "Carga ultra-rápida de menos de 1 segundo.",
+            "Carga ultra-rápída de menos de 1 segundo.",
             "Formularios dinámicos y botones de contacto que llaman la atención."
           ]
         },
@@ -649,7 +649,7 @@
             "Struttura psicologica incentrata sulla conversione rapida.",
             "Integrazione dei pixel pubblicitari per Facebook, Instagram e TikTok.",
             "Caricamento ultra rapido in meno di 1 secondo.",
-            "Moduli dinamici e pulsanti di contatto accattivanti."
+            "Moduli dinamici e pulsanti di contacto accattivanti."
           ]
         }
       },
@@ -758,7 +758,7 @@
         it: {
           title: "Portfolio d'Autore",
           desc: "Gallerie fluide e minimaliste ideali per fotografi, modelli, artisti e designer per mostrare le loro opere.",
-          longDesc: "La tua arte merita la migliore cornice possibile su Internet. Progettiamo gallerie dinamiche e prive di ritardi che caricano le tue opere ad alta risoluzione con sottili animazioni estetiche.",
+          longDesc: "La tua arte merita la migliore cornice possibile su Internet. Progettiamo gallerie dinamiche e prive di ritardi que caricano le tue opere ad alta risoluzione con sottili animazioni estetiche.",
           features: [
             "Effetti visivi fluidi al passaggio del mouse e all'apertura delle immagini.",
             "Ottimizzazione estrema della compressione delle immagini senza perdita di colore.",
@@ -877,7 +877,7 @@
             "Struttura robusta immune da rotture accidentali del layout.",
             "Video tutorial esclusivo passo-passo registrato per il tuo sito.",
             "Profili di editor multipli per il tuo team.",
-            "Caricamento di nuovi prodotti o contenidos con due soli clic."
+            "Caricamento di nuevos prodotti o contenidos con due soli clic."
           ]
         }
       },
@@ -994,7 +994,7 @@
         },
         it: {
           title: "Piano Studio-Lite",
-          desc: "Perfetto per liberi professionisti e marchi personali che iniziano in modo solido.",
+          desc: "Perfetto per liberi professionisti e marchi personali que iniziano in modo solido.",
           btn: "Acquista Piano Lite",
           features: [
             "Design di una singola pagina stilizzato",
@@ -1242,13 +1242,26 @@
               ${featuresListHTML}
             </ul>
           </div>
-          <!-- Se eliminaron comillas conflictivas usando selectores basados en ID en lugar de onclick inline para evitar errores de sintaxis -->
-          <button onclick="openChannelSelector(decodeURIComponent('${encodeURIComponent(langData.title)}'), decodeURIComponent('${encodeURIComponent(langData.msg)}'))" 
+          <!-- Usamos escuchadores de eventos dinámicos asignados de forma segura con JS -->
+          <button data-plan-id="${plan.id}" 
                   class="plan-btn-action w-full py-3.5 px-4 rounded-xl text-center text-sm font-semibold ${plan.isPopular ? 'bg-brandRojo hover:bg-brandNegro text-white shadow-md shadow-brandRojo/20' : 'bg-brandNegro hover:bg-brandRojo text-white'} transition-all">
             ${langData.btn}
           </button>
         `;
         planesGrid.appendChild(planCard);
+      });
+
+      // Asignar los escuchadores de eventos dinámicos para los botones de los planes de forma 100% segura
+      const planButtons = document.querySelectorAll('.plan-btn-action');
+      planButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const planId = this.getAttribute('data-plan-id');
+          const selectedPlan = planesMultiLang.find(p => p.id === planId);
+          if (selectedPlan) {
+            const planLangData = selectedPlan[currentLang];
+            openChannelSelector(planLangData.title, planLangData.msg);
+          }
+        });
       });
 
       // Volver a renderizar los iconos cargados dinámicamente con Lucide
