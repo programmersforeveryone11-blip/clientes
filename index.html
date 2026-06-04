@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>luizabeth's .studios | Diseño & Desarrollo Web Premium</title>
-  <!-- Tailwind CSS para diseño rápido y moderno -->
+  <!-- Tailwind CSS para diseño rápido yx moderno -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Playfair Display (Serif elegante como el logo) y DM Sans (Sans-serif limpia) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -432,7 +432,7 @@
             </div>
             <div class="text-left">
               <h4 class="font-bold text-rose-950 text-sm">Correo Electrónico</h4>
-              <p class="text-rose-700 text-xs">sophibarcos@gmail.com</p>
+              <p class="text-rose-700 text-xs" id="chan-email-display">luizabethsstudios@gmail.com</p>
             </div>
             <i data-lucide="chevron-right" class="w-5 h-5 ml-auto text-rose-400 group-hover:translate-x-1 transition-transform"></i>
           </a>
@@ -449,9 +449,9 @@
 
   <!-- TRADUCCIÓN COMPLETA Y BASE DE DATOS DE NUEVOS SERVICIOS MULTI-IDIOMA -->
   <script>
-    // Configuración inicial de contacto
+    // Configuración inicial de contacto (Actualizado con tu dirección de correo oficial)
     const phoneNumber = "584228028774"; 
-    const mailToEmail = "sophibarcos@gmail.com";
+    const mailToEmail = "luizabethsstudios@gmail.com";
     let currentLang = 'es';
 
     // DICCIONARIO GENERAL DE TRADUCCIONES DEL SITIO WEB
@@ -723,7 +723,7 @@
           longDesc: "Creazione di interfacce pulite, pannelli di statistiche visive (grafici delle vendite, controllo utenti) con particolare attenzione all'usabilità e un design estetico moderno que semplifica il controllo aziendale.",
           features: [
             "Design dell'interfaccia utente (UI/UX) ultra pulito.",
-            "Grafici di dati interattivi e dinamici.",
+            "Grafici di datos interattivi e dinamici.",
             "Gestione semplice e intuitiva per utenti non tecnici.",
             "Design completamente adaptato a tablet e desktop."
           ]
@@ -833,7 +833,7 @@
         },
         it: {
           title: "Restyling del Marchio Web",
-          desc: "Diamo una nuova veste moderna al tuo vecchio sito, adattandolo all'attuale sofisticata identità visiva del tuo brand.",
+          desc: "Diamo una nueva veste moderna al tuo vecchio sito, adattandolo all'attuale sofisticata identità visiva del tuo brand.",
           longDesc: "Se il tuo sito attuale appare obsoleto o difficile da usare, eseguiamo una riprogettazione visiva completa, adattando i tuoi colori, la tipografia e iniettando uno stile moderno e interattivo per aumentare la tua credibilidad.",
           features: [
             "Studio e correzione dei problemi di usabilità del vecchio sito.",
@@ -872,7 +872,7 @@
         it: {
           title: "Siti Web Autogestiti",
           desc: "Pannelli visivi intuitivi che consentono di modificare testi, foto o offerte in pochi secondi senza programmazione.",
-          longDesc: "Ti offriamo un'indipendenza assoluta. Sviluppiamo la plataforma con editor visivi intuitivi in modo che tu possa aggiornare i contenuti, caricare novità o modificare i prodotti ogni volta che lo desideri.",
+          longDesc: "Ti offriamo un'indipendenza assoluta. Sviluppiamo la plataforma con editor visivi intuitivi in modo que tu possa aggiornare i contenuti, caricare novità o modificare i prodotti ogni volta che lo desideri.",
           features: [
             "Struttura robusta immune da rotture accidentali del layout.",
             "Video tutorial esclusivo passo-passo registrato per il tuo sito.",
@@ -952,7 +952,7 @@
           features: [
             "Sviluppo di codice robusto, pulito e scalabile su misura.",
             "Progettazione di database sicuri ad alta velocità.",
-            "Collegamento con API esterne e gateway di logica.",
+            "Collegamento con API externe e gateway di logica.",
             "Prestazioni eccezionali garantite in presenza di elevati carichi di utenti."
           ]
         }
@@ -1243,25 +1243,12 @@
             </ul>
           </div>
           <!-- Se eliminaron comillas conflictivas usando selectores basados en ID en lugar de onclick inline para evitar errores de sintaxis -->
-          <button data-plan-id="${plan.id}" 
+          <button onclick="openChannelSelector(decodeURIComponent('${encodeURIComponent(langData.title)}'), decodeURIComponent('${encodeURIComponent(langData.msg)}'))" 
                   class="plan-btn-action w-full py-3.5 px-4 rounded-xl text-center text-sm font-semibold ${plan.isPopular ? 'bg-brandRojo hover:bg-brandNegro text-white shadow-md shadow-brandRojo/20' : 'bg-brandNegro hover:bg-brandRojo text-white'} transition-all">
             ${langData.btn}
           </button>
         `;
         planesGrid.appendChild(planCard);
-      });
-
-      // Asignar los escuchadores de eventos dinámicos para los botones de los planes y evitar errores de sintaxis por comillas simples
-      const planButtons = document.querySelectorAll('.plan-btn-action');
-      planButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const planId = this.getAttribute('data-plan-id');
-          const selectedPlan = planesMultiLang.find(p => p.id === planId);
-          if (selectedPlan) {
-            const planLangData = selectedPlan[currentLang];
-            openChannelSelector(planLangData.title, planLangData.msg);
-          }
-        });
       });
 
       // Volver a renderizar los iconos cargados dinámicamente con Lucide
