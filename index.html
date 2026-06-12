@@ -4,13 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>luizabeth's .studios | Diseño & Desarrollo Web Premium</title>
-  <!-- Tailwind CSS para diseño rápido y moderno -->
+  
+  <!-- CDN de Tailwind CSS para renderizado estable en cualquier plataforma -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Playfair Display (Serif elegante como el logo) y DM Sans (Sans-serif limpia) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin crossOrigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-  <!-- Lucide Icons para iconos profesionales -->
+
+  <!-- Script oficial de Lucide para renderizar los iconos dinámicamente -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <script>
@@ -25,8 +23,8 @@
             brandGris: '#555555'
           },
           fontFamily: {
-            serif: ['"Playfair Display"', 'serif'],
-            sans: ['"DM Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'ui-serif', 'serif'],
+            sans: ['"DM Sans"', 'Arial', 'ui-sans-serif', 'sans-serif'],
           }
         }
       }
@@ -57,6 +55,17 @@
     .modal-open {
       overflow: hidden;
     }
+
+    /* Animación cuchi y saltarina para el selector de idiomas activo */
+    .active-lang-pill {
+      animation: bounceLittle 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes bounceLittle {
+      0% { transform: scale(0.92); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
   </style>
 </head>
 <body class="bg-brandCrema text-brandNegro font-sans antialiased selection:bg-brandRojo selection:text-white">
@@ -64,9 +73,9 @@
   <!-- BARRA DE RAYAS SUPERIOR FIJA -->
   <div class="fixed top-0 left-0 w-full h-3 rayas-patron z-50"></div>
 
-  <!-- NAVBAR PRINCIPAL FIJO (STICKY NAVBAR) que no se baja -->
+  <!-- NAVBAR PRINCIPAL FIJO (STICKY NAVBAR) -->
   <header class="fixed top-3 left-0 w-full bg-brandCrema/95 backdrop-blur-md border-b border-brandNegro/5 z-40 py-3 shadow-sm px-4 md:px-8">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0">
       
       <!-- LOGO RECREADO FIELMENTE (luizabeth's .studios) -->
       <a href="#" class="flex items-center gap-3 group">
@@ -103,16 +112,31 @@
         <a href="#filosofia" id="nav-nosotros" class="hover:text-brandRojo transition-colors duration-200">Nosotros</a>
       </nav>
 
-      <!-- SECTOR DE IDIOMA Y BOTÓN DE CONTACTO -->
+      <!-- SECTOR DE IDIOMA ULTRA CUCHI Y BOTÓN DE CONTACTO -->
       <div class="flex items-center gap-4">
         
-        <!-- Selector de Idioma Minimalista -->
-        <div class="relative inline-block text-left">
-          <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-white/80 border border-brandNegro/10 text-brandNegro text-xs font-bold uppercase tracking-wider py-2 px-3 rounded-xl focus:outline-none focus:border-brandRojo cursor-pointer">
-            <option value="es">ES 🇪🇸</option>
-            <option value="en">EN 🇬🇧</option>
-            <option value="it">IT 🇮🇹</option>
-          </select>
+        <!-- SELECTOR DE IDIOMA PERSONALIZADO TIPO PÍLDORA "BIEN CUCHI" -->
+        <div class="bg-white/90 border border-brandNegro/10 p-1 rounded-full flex gap-1 items-center shadow-sm relative overflow-hidden">
+          <!-- Fondo deslizante interactivo -->
+          <div id="cuchi-indicator" class="absolute top-1 bottom-1 left-1 bg-brandRojo rounded-full transition-all duration-300 ease-out z-0"></div>
+          
+          <!-- Botón ES -->
+          <button onclick="changeLanguage('es')" id="btn-lang-es" class="relative z-10 px-3 py-1.5 rounded-full text-xs font-bold tracking-tight uppercase flex items-center gap-1.5 transition-all">
+            <span class="text-base">🇪🇸</span>
+            <span id="label-lang-es" class="hidden sm:inline text-[10px]">ES</span>
+          </button>
+          
+          <!-- Botón EN -->
+          <button onclick="changeLanguage('en')" id="btn-lang-en" class="relative z-10 px-3 py-1.5 rounded-full text-xs font-bold tracking-tight uppercase flex items-center gap-1.5 transition-all text-brandNegro/60 hover:text-brandNegro">
+            <span class="text-base">🇬🇧</span>
+            <span id="label-lang-en" class="hidden sm:inline text-[10px]">EN</span>
+          </button>
+          
+          <!-- Botón IT -->
+          <button onclick="changeLanguage('it')" id="btn-lang-it" class="relative z-10 px-3 py-1.5 rounded-full text-xs font-bold tracking-tight uppercase flex items-center gap-1.5 transition-all text-brandNegro/60 hover:text-brandNegro">
+            <span class="text-base">🇮🇹</span>
+            <span id="label-lang-it" class="hidden sm:inline text-[10px]">IT</span>
+          </button>
         </div>
 
         <!-- BOTÓN DE CONTACTO RÁPIDO -->
@@ -125,7 +149,7 @@
   </header>
 
   <!-- SECCIÓN HERO -->
-  <section id="inicio" class="pt-32 pb-20 md:pt-44 md:pb-28 px-4 relative overflow-hidden bg-gradient-to-b from-brandCrema to-white">
+  <section id="inicio" class="pt-36 pb-20 md:pt-48 md:pb-28 px-4 relative overflow-hidden bg-gradient-to-b from-brandCrema to-white">
     <!-- Sutiles líneas estéticas de fondo -->
     <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
       <div class="max-w-7xl mx-auto h-full w-full border-l border-r border-brandNegro flex justify-between">
@@ -294,7 +318,7 @@
         </a>
 
         <!-- TikTok Link -->
-        <a href="https://www.tiktok.com/@luizabeths_studios?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" 
+        <a href="https://www.instagram.com/luizabeths_studios/?hl=es" target="_blank" rel="noopener" 
            class="group w-14 h-14 rounded-2xl bg-white border border-brandNegro/10 flex items-center justify-center text-brandNegro hover:text-white hover:bg-[#010101] hover:scale-110 hover:-translate-y-1 shadow-sm hover:shadow-[0_10px_25px_rgba(0,242,234,0.3),_0_10px_25px_rgba(254,44,85,0.3)] transition-all duration-300"
            aria-label="TikTok">
           <svg class="w-6 h-6 fill-current transition-transform group-hover:scale-110 group-hover:text-white" viewBox="0 0 24 24">
@@ -327,7 +351,6 @@
 
   <!-- VENTANA EMERGENTE (MODAL INTERACTIVO) PARA LOS SERVICIOS -->
   <div id="serviceModal" class="fixed inset-0 bg-brandNegro/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-    <!-- Contenido del Modal -->
     <div class="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl relative transform scale-95 transition-all duration-300">
       
       <!-- Detalle estético de rayas arriba del modal -->
@@ -449,7 +472,7 @@
 
   <!-- TRADUCCIÓN COMPLETA Y BASE DE DATOS DE NUEVOS SERVICIOS MULTI-IDIOMA -->
   <script>
-    // Configuración inicial de contacto (Actualizado con tu dirección de correo oficial)
+    // Configuración inicial de contacto
     const phoneNumber = "584228028774"; 
     const mailToEmail = "luizabethsstudios@gmail.com";
     let currentLang = 'es';
@@ -575,7 +598,7 @@
       }
     };
 
-    // BASE DE DATOS DE LOS 10 SERVICIOS SOLICITADOS (CON IDIOMAS)
+    // BASE DE DATOS DE LOS 10 SERVICIOS SOLICITADOS
     const serviciosMultiLang = {
       1: {
         icon: "shopping-bag",
@@ -758,7 +781,7 @@
         it: {
           title: "Portfolio d'Autore",
           desc: "Gallerie fluide e minimaliste ideali per fotografi, modelli, artisti e designer per mostrare le loro opere.",
-          longDesc: "La tua arte merita la migliore cornice possibile su Internet. Progettiamo gallerie dinamiche e prive di ritardi que caricano le tue opere ad alta risoluzione con sottili animazioni estetiche.",
+          longDesc: "La tua arte merita la migliore cornice possibile su Internet. Progettiamo gallerie dinamiche e prive di ritardi que caricano le tue opere ad alta risoluzione con sottili animaciones estetiche.",
           features: [
             "Effetti visivi fluidi al passaggio del mouse e all'apertura delle immagini.",
             "Ottimizzazione estrema della compressione delle immagini senza perdita di colore.",
@@ -959,7 +982,7 @@
       }
     };
 
-    // BASE DE DATOS DE LOS PLANES (CON IDIOMAS - RESTAURADO CON LA OPCIÓN SIGNATURE)
+    // BASE DE DATOS DE LOS PLANES
     const planesMultiLang = [
       {
         id: "lite",
@@ -1098,6 +1121,33 @@
       }
     ];
 
+    // FUNCIÓN PARA ACTUALIZAR EL DISEÑO DEL SELECTOR ULTRA CUCHI DESLIZANTE
+    function updateCuchiPill(lang) {
+      const btnEs = document.getElementById('btn-lang-es');
+      const btnEn = document.getElementById('btn-lang-en');
+      const btnIt = document.getElementById('btn-lang-it');
+      const indicator = document.getElementById('cuchi-indicator');
+
+      // Remover clases de colores activos
+      [btnEs, btnEn, btnIt].forEach(btn => {
+        btn.classList.remove('text-white', 'active-lang-pill');
+        btn.classList.add('text-brandNegro/60');
+      });
+
+      // Calcular posiciones de manera adaptativa según el botón seleccionado
+      let targetBtn = btnEs;
+      if (lang === 'en') targetBtn = btnEn;
+      if (lang === 'it') targetBtn = btnIt;
+
+      // Aplicar estilos del botón activo
+      targetBtn.classList.remove('text-brandNegro/60');
+      targetBtn.classList.add('text-white', 'active-lang-pill');
+
+      // Mover el fondo indicador "cuchi" con precisión
+      indicator.style.left = `${targetBtn.offsetLeft}px`;
+      indicator.style.width = `${targetBtn.offsetWidth}px`;
+    }
+
     // FUNCIÓN PARA RENDERIZAR TODO EL SITIO SEGÚN EL IDIOMA SELECCIONADO
     function renderSite() {
       const texts = generalTranslations[currentLang];
@@ -1146,6 +1196,9 @@
       document.getElementById('chan-tg-desc').textContent = texts.chanTgDesc;
       document.getElementById('chan-btn-cancel').textContent = texts.chanBtnCancel;
 
+      // Actualizar visualmente el botón de selección de idioma deslizante
+      updateCuchiPill(currentLang);
+
       // RENDERIZAR LAS 10 TARJETAS DE SERVICIOS
       const grid = document.getElementById('servicesGrid');
       grid.innerHTML = '';
@@ -1157,7 +1210,6 @@
         const card = document.createElement('div');
         card.setAttribute('onclick', `openModal(${id})`);
         
-        // La tarjeta número 10 se centrará usando reglas condicionales de Tailwind en pantallas grandes
         let gridClasses = "group bg-white rounded-3xl p-8 border border-brandNegro/[0.06] hover:border-brandRojo/50 shadow-sm hover:shadow-[0_20px_50px_rgba(209,26,26,0.12)] hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col justify-between h-[340px] relative overflow-hidden";
         if (parseInt(id) === 10) {
           gridClasses += " lg:col-start-2 lg:col-span-1";
@@ -1188,7 +1240,7 @@
         grid.appendChild(card);
       });
 
-      // RENDERIZAR LAS TARJETAS DE PLANES (ACTUALIZADOS CON EL NUEVO FORMATO DE PRECIOS Y SIGNATURE RESTAURADO)
+      // RENDERIZAR LAS TARJETAS DE PLANES
       const planesGrid = document.getElementById('planesGrid');
       planesGrid.innerHTML = '';
 
@@ -1216,7 +1268,6 @@
           `;
         });
 
-        // Configuración condicional para etiquetas de precio del hosting en Signature
         let hostingSubText = texts.hostingLabel;
         if (plan.id === 'signature') {
           hostingSubText = currentLang === 'es' ? 'Sujeto a requerimiento' : (currentLang === 'it' ? 'Soggetto a requisiti' : 'Subject to requirements');
@@ -1242,7 +1293,6 @@
               ${featuresListHTML}
             </ul>
           </div>
-          <!-- Usamos escuchadores de eventos dinámicos asignados de forma segura con JS -->
           <button data-plan-id="${plan.id}" 
                   class="plan-btn-action w-full py-3.5 px-4 rounded-xl text-center text-sm font-semibold ${plan.isPopular ? 'bg-brandRojo hover:bg-brandNegro text-white shadow-md shadow-brandRojo/20' : 'bg-brandNegro hover:bg-brandRojo text-white'} transition-all">
             ${langData.btn}
@@ -1251,7 +1301,7 @@
         planesGrid.appendChild(planCard);
       });
 
-      // Asignar los escuchadores de eventos dinámicos para los botones de los planes de forma 100% segura
+      // Asignar los escuchadores de eventos para los planes
       const planButtons = document.querySelectorAll('.plan-btn-action');
       planButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -1264,7 +1314,7 @@
         });
       });
 
-      // Volver a renderizar los iconos cargados dinámicamente con Lucide
+      // Volver a renderizar los iconos de Lucide
       lucide.createIcons();
     }
 
@@ -1273,6 +1323,11 @@
       currentLang = lang;
       renderSite();
     }
+
+    // Ajustar el indicador del selector al cambiar el tamaño de la ventana para mantener la consistencia
+    window.addEventListener('resize', () => {
+      updateCuchiPill(currentLang);
+    });
 
     // Ejecutar render inicial
     window.onload = function() {
@@ -1288,23 +1343,19 @@
     const channelSelectorModal = document.getElementById('channelSelectorModal');
     const channelSelectorContent = channelSelectorModal.querySelector('.scale-95');
 
-    // Función para abrir el modal de un servicio con traducción interactiva
     function openModal(serviceId) {
       const data = serviciosMultiLang[serviceId];
       if (!data) return;
 
       const langData = data[currentLang];
 
-      // Cambiar Título, descripción e ícono en el modal
       document.getElementById('modalTitle').textContent = langData.title;
       document.getElementById('modalDescription').textContent = langData.longDesc;
       
-      // Actualizar contenedor del ícono con sus clases de color
       const iconContainer = document.getElementById('modalIconContainer');
       iconContainer.className = `w-16 h-16 rounded-2xl flex items-center justify-center mb-6 ${data.colorClass}`;
       iconContainer.innerHTML = `<i data-lucide="${data.icon}" class="w-8 h-8"></i>`;
 
-      // Cargar lista de características detalladas
       const featuresList = document.getElementById('modalFeatures');
       featuresList.innerHTML = '';
       langData.features.forEach(feat => {
@@ -1314,7 +1365,6 @@
         featuresList.appendChild(li);
       });
 
-      // Configurar el llamado al selector de canal con mensaje dinámico traducido
       let targetMsg = "";
       if (currentLang === 'es') {
         targetMsg = `¡Hola luizabeth's .studios! Me gustaría contratar el servicio premium de: "${langData.title}". Me pareció fantástico lo que vi en su web.`;
@@ -1332,10 +1382,8 @@
         }, 350);
       };
 
-      // Re-renderizar iconos en el modal dinámico
       lucide.createIcons();
 
-      // Enciende el modal
       modal.classList.remove('opacity-0', 'pointer-events-none');
       modalContent.classList.remove('scale-95');
       modalContent.classList.add('scale-100');
@@ -1349,13 +1397,11 @@
       document.body.classList.remove('modal-open');
     }
 
-    // ABRIR EL SELECTOR DE CANALES
     function openChannelSelector(itemName, customMessage) {
       document.getElementById('channelSelectorSub').textContent = `${currentLang === 'es' ? 'Contratando:' : (currentLang === 'it' ? 'Contrattando:' : 'Booking:')} ${itemName}`;
       
       const encodedMsg = encodeURIComponent(customMessage);
       
-      // Enlaces dinámicos
       const whatsAppURL = `https://wa.me/${phoneNumber}?text=${encodedMsg}`;
       const telegramURL = `https://t.me/+${phoneNumber}`;
       const gmailURL = `mailto:${mailToEmail}?subject=Interés%20en%20${encodeURIComponent(itemName)}&body=${encodedMsg}`;
@@ -1364,7 +1410,6 @@
       document.getElementById('channelTelegram').setAttribute('href', telegramURL);
       document.getElementById('channelGmail').setAttribute('href', gmailURL);
 
-      // Abrir Modal Selector
       channelSelectorModal.classList.remove('opacity-0', 'pointer-events-none');
       channelSelectorContent.classList.remove('scale-95');
       channelSelectorContent.classList.add('scale-100');
@@ -1380,7 +1425,6 @@
       }
     }
 
-    // Contacto General desde Botones de Navbar / Hero
     function triggerGeneralContact() {
       let defaultMsg = "¡Hola luizabeth's .studios! Vengo de su sitio web y me gustaría ponerme en contacto con ustedes.";
       if (currentLang === 'en') {
@@ -1391,7 +1435,6 @@
       openChannelSelector("Contacto General / General Contact", defaultMsg);
     }
 
-    // Eventos para cerrar haciendo clic en el fondo oscuro
     modal.addEventListener('click', function(e) {
       if (e.target === modal) closeModal();
     });
@@ -1399,7 +1442,6 @@
       if (e.target === channelSelectorModal) closeChannelSelector();
     });
 
-    // Cerrar con Escape
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         closeModal();
